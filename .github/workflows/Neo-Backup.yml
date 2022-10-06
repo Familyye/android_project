@@ -1,0 +1,39 @@
+name: Neo-Backup
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Delete workflows
+        uses: Mattraks/delete-workflow-runs@v2
+        with:
+          token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          retain_days: 1 # 只留1条
+          keep_minimum_runs: 1 # 只留最新1条
+
+
+      - id: get-project
+        name: Get project name
+        run: echo "::set-output name=PROJECT::$(cat Neo-Backup)"
+      - name: Clone project
+        run: git clone --depth=1 ${{ steps.get-project.outputs.PROJECT }} project
+      - name: Build the app
+        working-directory: ./project
+        run: |        
+          chmod +x gradlew
+          ./gradlew assemblerelease --build-cache --parallel --daemon --warning-mode all
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: Neo-Backup
+          path: ./project/app/build/outputs/apk/release/*.apk
