@@ -18,7 +18,7 @@ jobs:
         with:
           token: ${{ github.token }}
           repository: ${{ github.repository }}
-          retain_days: 1 # 只留1条
+          retain_days: 0 # 只留1条
           keep_minimum_runs: 1 # 只留最新1条
 
 
@@ -30,7 +30,7 @@ jobs:
       - name: Build the app
         working-directory: ./project
         run: |                
-          sed -i 's/Neo Backup/Neo Backup/g' app/src/main/res/values/strings.xml
+          sed -i 's/Neo Backup/NeoBackup/g' app/src/main/res/values/strings.xml
           chmod +x gradlew
           ./gradlew assemblerelease --build-cache --parallel --daemon --warning-mode all
       - name: Upload APK
