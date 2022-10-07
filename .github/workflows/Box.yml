@@ -18,7 +18,7 @@ jobs:
         with:
           token: ${{ github.token }}
           repository: ${{ github.repository }}
-          retain_days: 1 # 只留1条
+          retain_days: 0 # 只留1条
           keep_minimum_runs: 1 # 只留最新1条
       
       - name: Clone project
