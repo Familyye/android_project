@@ -29,7 +29,8 @@ jobs:
         run: git clone --depth=1 https://github.com/NeoApplications/Neo-Backup project
       - name: Build the app
         working-directory: ./project
-        run: |        
+        run: |                
+          sed -i 's/Neo Backup/Neo Backup/g' app/src/main/res/values/strings.xml
           chmod +x gradlew
           ./gradlew assemblerelease --build-cache --parallel --daemon --warning-mode all
       - name: Upload APK
