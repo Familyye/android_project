@@ -26,7 +26,7 @@ jobs:
         name: Get project name
         run: echo "::set-output name=PROJECT::$(cat Neo-Backup)"
       - name: Clone project
-        run: git clone --depth=1 ${{ steps.get-project.outputs.PROJECT }} project
+        run: git clone --depth=1 https://github.com/NeoApplications/Neo-Backup project
       - name: Build the app
         working-directory: ./project
         run: |        
