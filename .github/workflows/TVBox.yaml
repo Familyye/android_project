@@ -24,8 +24,7 @@ jobs:
 
       - name: Clone project
         run: |
-          git clone -b main --depth=1 https://github.com/mymine/TVBox project
-          
+          git clone -b main --depth=1 https://github.com/mymine/TVBox project       
       - name: Release Apk Sign
         working-directory: ./project
         run: |
