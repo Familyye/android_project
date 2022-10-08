@@ -23,7 +23,7 @@ jobs:
 
 
       - name: Clone project
-        run: git clone --depth=1 https://github.com/aiyakuaile/easy_tv_live project
+        run: git clone --depth=1 https://github.com/mymine/JJTV project
       - name: Release Apk Sign
         working-directory: project
         run: |        
