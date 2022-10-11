@@ -22,7 +22,7 @@ jobs:
           keep_minimum_runs: 1 # 只留最新1条
       
       - name: Clone project
-        run: git clone -b main --depth=1 https://github.com/takagen99/Box project
+        run: git clone -b search --depth=1 https://github.com/zyzyzy523/TVBox project
       - name: Release Apk Sign
         working-directory: ./project
         run: |
