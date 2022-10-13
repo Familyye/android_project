@@ -23,7 +23,7 @@ jobs:
 
 
       - name: Clone project
-        run: git clone --depth=1 https://github.com/FongMi/TV project
+        run: git clone -b dev --depth=1 https://github.com/FongMi/TV project
       - name: Release Apk Sign
         working-directory: project
         run: |        
