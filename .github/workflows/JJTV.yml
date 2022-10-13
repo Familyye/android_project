@@ -1,4 +1,4 @@
-name: JJTV
+name: FMTV
 
 on:
   workflow_dispatch:
@@ -23,7 +23,7 @@ jobs:
 
 
       - name: Clone project
-        run: git clone --depth=1 https://github.com/mymine/JJTV project
+        run: git clone --depth=1 https://github.com/FongMi/TV project
       - name: Release Apk Sign
         working-directory: project
         run: |        
@@ -45,5 +45,5 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v2
         with:
-          name: JJTV
+          name: FMTV
           path: ./project/app/build/outputs/apk/release/*.apk
