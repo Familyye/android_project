@@ -12,8 +12,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          distribution: 'zulu'
-          java-version: 17
+          java-version: 14
           cache: 'gradle'
       - name: Delete workflows
         uses: Mattraks/delete-workflow-runs@v2
