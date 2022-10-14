@@ -12,7 +12,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          java-version: 19
+          java-version: 12
           cache: 'gradle'
       - name: Delete workflows
         uses: Mattraks/delete-workflow-runs@v2
@@ -20,7 +20,7 @@ jobs:
           token: ${{ github.token }}
           repository: ${{ github.repository }}
           retain_days: 0 # 只留1条
-          keep_minimum_runs: 1 # 只留最新1条
+          keep_minimum_runs: 0 # 只留最新1条
       
       - name: Clone project
         run: git clone -b main --depth=1 https://github.com/takagen99/Box project
