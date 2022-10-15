@@ -1,4 +1,4 @@
-name: FMTV
+name: SmsForwarder
 
 on:
   workflow_dispatch:
@@ -45,5 +45,5 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v2
         with:
-          name: FMTV
+          name: SmsForwarder
           path: ./project/app/build/outputs/apk/release/*.apk
