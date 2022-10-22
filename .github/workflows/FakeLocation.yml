@@ -5,28 +5,31 @@ on:
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout the code
-        uses: actions/checkout@v2
-      - name: Set up JDK
-        uses: actions/setup-java@v1
-        with:
-          java-version: 12
-      - name: Delete workflows
-        uses: Mattraks/delete-workflow-runs@v2
-        with:
-          token: ${{ github.token }}
-          repository: ${{ github.repository }}
-          retain_days: 0 # 只留1条
-          keep_minimum_runs: 1 # 只留最新1条
+    - uses: actions/checkout@v3
+    - name: set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: gradle
 
-
-      - name: Clone project
-        run: git clone --depth=1 https://github.com/WaterlooBridge/FakeLocation project
-      - name: Release Apk Sign
-        working-directory: project
-        run: |
+    - name: Delete workflows
+      uses: Mattraks/delete-workflow-runs@v2
+      with:
+        token: ${{ github.token }}
+        repository: ${{ github.repository }}
+        retain_days: 0 # 只留1条
+        keep_minimum_runs: 0 # 只留最新1条
+      
+    - name: Clone project
+      run: git clone --depth=1 https://github.com/WaterlooBridge/FakeLocation project
+    - name: Release Apk Sign
+      working-directory: ./project
+      run: |
           signingConfigs='ICAgIHNpZ25pbmdDb25maWdzIHtcCiAgICAgICAgaWYgKHByb2plY3QuaGFzUHJvcGVydHkoIlJFTEVBU0VfU1RPUkVfRklMRSIpKSB7XAogICAgICAgICAgICBteUNvbmZpZyB7XAogICAgICAgICAgICAgICAgc3RvcmVGaWxlIGZpbGUoUkVMRUFTRV9TVE9SRV9GSUxFKVwKICAgICAgICAgICAgICAgIHN0b3JlUGFzc3dvcmQgUkVMRUFTRV9TVE9SRV9QQVNTV09SRFwKICAgICAgICAgICAgICAgIGtleUFsaWFzIFJFTEVBU0VfS0VZX0FMSUFTXAogICAgICAgICAgICAgICAga2V5UGFzc3dvcmQgUkVMRUFTRV9LRVlfUEFTU1dPUkRcCiAgICAgICAgICAgICAgICB2MVNpZ25pbmdFbmFibGVkIHRydWVcCiAgICAgICAgICAgICAgICB2MlNpZ25pbmdFbmFibGVkIHRydWVcCiAgICAgICAgICAgICAgICBlbmFibGVWM1NpZ25pbmcgPSB0cnVlXAogICAgICAgICAgICAgICAgZW5hYmxlVjRTaWduaW5nID0gdHJ1ZVwKICAgICAgICAgICAgfVwKICAgICAgICB9XAogICAgfVwKXA=='
           signingConfig='ICAgICAgICAgICAgaWYgKHByb2plY3QuaGFzUHJvcGVydHkoIlJFTEVBU0VfU1RPUkVfRklMRSIpKSB7XAogICAgICAgICAgICAgICAgc2lnbmluZ0NvbmZpZyBzaWduaW5nQ29uZmlncy5teUNvbmZpZ1wKICAgICAgICAgICAgfVwK'
           signingConfigs="$(echo "$signingConfigs" |base64 -d )"
@@ -37,13 +40,14 @@ jobs:
           sed -i '$a\RELEASE_KEY_ALIAS=Android'            ./gradle.properties
           sed -i '$a\RELEASE_STORE_PASSWORD=Android'       ./gradle.properties
           sed -i '$a\RELEASE_KEY_PASSWORD=Android'         ./gradle.properties        
-      - name: Build the app
-        working-directory: project
-        run: |        
-          chmod +x gradlew
-          ./gradlew assemblerelease --build-cache --parallel --daemon --warning-mode all
-      - name: Upload APK
-        uses: actions/upload-artifact@v2
-        with:
-          name: FakeLocation
-          path: ./project/app/build/outputs/apk/release/*.apk
+          
+    - name: Build the app
+      working-directory: ./project
+      run: |        
+        chmod +x gradlew
+        ./gradlew assemblerelease --build-cache --parallel --daemon --warning-mode all
+    - name: Upload APK
+      uses: actions/upload-artifact@v3
+      with:
+        name: FakeLocation
+        path: ./project/app/build/outputs/apk/release/*.apk
