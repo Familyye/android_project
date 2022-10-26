@@ -35,9 +35,9 @@ jobs:
       run: |                
         sed -i 's/Neo Backup/NeoBackup/g' app/src/main/res/values/strings.xml
         chmod +x gradlew
-        ./gradlew compileReleaseSources
+        ./gradlew assemblerelease
     - name: Upload APK
       uses: actions/upload-artifact@v3
       with:
         name: Neo-Backup
-        path: ./**/*.apk
+        path: ./project/app/build/outputs/apk/release/*.apk
