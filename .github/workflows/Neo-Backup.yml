@@ -41,3 +41,17 @@ jobs:
       with:
         name: Neo-Backup
         path: ./project/app/build/outputs/apk/release/*.apk
+      - name: Upload file to file.io
+        id: fileio
+        run: |
+          curl -sL https://git.io/file-transfer | bash -s beta
+          ./transfer fio TVBoxOS/app/build/outputs/apk/release/app-release.apk 2>&1 | tee file.io.log
+          var=$(cat file.io.log)
+          echo "::warning file=file.io::$(cat file.io.log | grep https)"
+          echo "::set-output name=url::$(cat file.io.log | grep https | cut -f3 -d" ")"
+      - name: Update files
+        uses: EndBug/add-and-commit@v9
+        with:        
+          default_author: github_actions
+          message: 'update files'
+          add: ./transfer
