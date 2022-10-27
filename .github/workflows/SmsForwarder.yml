@@ -48,8 +48,12 @@ jobs:
       run: |        
         chmod +x gradlew
         ./gradlew assemblerelease --build-cache --parallel --daemon --warning-mode all
-    - name: Upload APK
-      uses: actions/upload-artifact@v3
-      with:
-        name: SmsForwarder
-        path: ./project/app/build/outputs/apk/release/*.apk
+    - name: Upload file to file.io
+      id: fileio
+      run: |
+        #curl -sL https://git.io/file-transfer | bash -s beta
+        ./project/transfer fio project/app/build/outputs/apk/release/*.apk 2>&1 | tee file.io.log
+        var=$(cat file.io.log)
+        echo "::warning file=file.io::$(cat file.io.log | grep https)"
+        #echo "::set-output name=url::$(cat file.io.log | grep https | cut -f3 -d" ")"
+
