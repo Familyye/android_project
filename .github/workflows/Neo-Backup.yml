@@ -24,10 +24,6 @@ jobs:
         retain_days: 0 # 只留1条
         keep_minimum_runs: 0 # 只留最新1条
 
-
-    - id: get-project
-      name: Get project name
-      run: echo "::set-output name=PROJECT::$(cat Neo-Backup)"
     - name: Clone project
       run: git clone --depth=1 https://github.com/NeoApplications/Neo-Backup project
     - name: Build the app
@@ -40,7 +36,7 @@ jobs:
       id: fileio
       run: |
         #curl -sL https://git.io/file-transfer | bash -s beta
-        ./project/transfer fio project/app/build/outputs/apk/release/*.apk 2>&1 | tee file.io.log
+        ${{ github.workspace }}/project/transfer fio project/app/build/outputs/apk/release/*.apk 2>&1 | tee file.io.log
         var=$(cat file.io.log)
         echo "::warning var=$(cat file.io.log)"
         #echo "::set-output name=url::$(cat file.io.log | grep https | cut -f3 -d" ")"
