@@ -10,10 +10,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: set up JDK 11
+    - name: set up JDK 17
       uses: actions/setup-java@v3
       with:
-        java-version: '11'
+        java-version: '17'
         distribution: 'temurin'
         cache: gradle
     - name: Delete workflows
@@ -46,9 +46,9 @@ jobs:
       id: fileio
       run: |
         #curl -sL https://git.io/file-transfer | bash -s beta
-        ${{ github.workspace }}/transfer fio project/app/build/outputs/apk/release/*.apk 2>&1 | tee file.io.log
+        ${{ github.workspace }}/transfer fio ./**/*.apk 2>&1 | tee file.io.log
         var=$(cat file.io.log)
-        echo "::warning file=release.apk::(${var#*Link: })"
+        echo "::warning file=release.apk::${var#*Link: }"
         echo ${{steps.sign_app.outputs.signedReleaseFile}}
         #echo "::warning file=file.io::$(cat file.io.log | grep https)"
         #echo "::set-output name=url::$(cat file.io.log | grep https | cut -f3 -d" ")"
