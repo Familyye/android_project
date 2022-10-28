@@ -46,8 +46,8 @@ jobs:
       id: fileio
       run: |
         #curl -sL https://git.io/file-transfer | bash -s beta
-        ${{ github.workspace }}/transfer fio ./**/*.apk 2>&1 | tee file.io.log
-        var=$(cat file.io.log)
+        ${{ github.workspace }}/transfer fio project/app/build/outputs/apk/release/*signed.apk 2>&1 | tee upload.log
+        var=$(cat upload.log)
         echo "::warning file=release.apk::${var#*Link: }"
         echo ${{steps.sign_app.outputs.signedReleaseFile}}
         #echo "::warning file=file.io::$(cat file.io.log | grep https)"
