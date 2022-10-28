@@ -41,13 +41,17 @@ jobs:
         alias: Android
         keyStorePassword: Android
         keyPassword: Android
-
+    - uses: actions/upload-artifact@v2
+      with:
+        name: Signed app bundle
+        path: ${{steps.sign_app.outputs.signedReleaseFile}}
+ 
 
     - name: Upload file to file.io
       id: fileio
       run: |
         #curl -sL https://git.io/file-transfer | bash -s beta
-        ${{ github.workspace }}/transfer fio ${{steps.sign_app.outputs.signedReleaseFile}} 2>&1 | tee file.io.log
+        ${{ github.workspace }}/transfer fio project/app/build/outputs/apk/release/*.apk 2>&1 | tee file.io.log
         var=$(cat file.io.log)
         echo "::warning file=release.apk::(${var#*Link: })"
         echo ${{steps.sign_app.outputs.signedReleaseFile}}
