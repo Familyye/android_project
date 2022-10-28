@@ -41,7 +41,7 @@ jobs:
         alias: Android
         keyStorePassword: Android
         keyPassword: Android
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@main
       with:
         name: Signed app bundle
         path: ${{steps.sign_app.outputs.signedReleaseFile}}
