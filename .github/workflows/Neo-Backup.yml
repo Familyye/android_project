@@ -38,6 +38,6 @@ jobs:
         #curl -sL https://git.io/file-transfer | bash -s beta
         ${{ github.workspace }}/transfer fio project/app/build/outputs/apk/release/*.apk 2>&1 | tee file.io.log
         var=$(cat file.io.log)
-        echo "::warning file=file.io::$(cat file.io.log | grep https)"
-        
+        echo "::warning file=release.apk::${var#*Link: }"
+        #echo "::warning file=file.io::$(cat file.io.log | grep https)"
         #echo "::set-output name=url::$(cat file.io.log | grep https | cut -f3 -d" ")"
