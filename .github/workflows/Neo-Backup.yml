@@ -33,7 +33,7 @@ jobs:
         chmod +x gradlew
         ./gradlew assemblerelease
 
-    - uses: r0adkll/sign-android-release@master
+    - uses: Howard20181/sign-android-release@patch-1
       name: Sign APK
       with:
         releaseDirectory: project/app/build/outputs/apk/release
