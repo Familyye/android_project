@@ -47,7 +47,6 @@ jobs:
       run: |
         #curl -sL https://git.io/file-transfer | bash -s beta
         chmod +x ${{ github.workspace }}/transfer
-        ${{ github.workspace }}/transfer wet project/app/build/outputs/apk/release/*.apk  | tee upload.log
-        var=$(cat upload.log)
-        echo "::warning file=release.apk::${var#*Link: }"
+        ${{ github.workspace }}/transfer wet project/app/build/outputs/apk/release/*.apk  | tee upload.log        
+        echo "::warning file=Download Link::$(cat upload.log | grep https | cut -f3 -d" ")"
        
