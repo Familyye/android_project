@@ -22,8 +22,8 @@ jobs:
       with:
         token: ${{ github.token }}
         repository: ${{ github.repository }}
-        retain_days: 0 # 只留1条
-        keep_minimum_runs: 0 # 只留最新1条
+        retain_days: 0 # 
+        keep_minimum_runs: 2 # 只留最新2条
       
     - name: Clone project
       run: git clone -b main --depth=1 https://github.com/takagen99/Box project
