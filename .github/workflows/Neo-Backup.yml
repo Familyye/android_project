@@ -21,7 +21,7 @@ jobs:
       with:
         token: ${{ github.token }}
         repository: ${{ github.repository }}
-        retain_days: 0 # 
+        retain_days: 1 # 
         keep_minimum_runs: 2 # 只留最新3条
 
     - name: Clone project
@@ -47,6 +47,6 @@ jobs:
       run: |
         #curl -sL https://git.io/file-transfer | bash -s beta
         chmod +x ${{ github.workspace }}/transfer
-        ${{ github.workspace }}/transfer wet project/app/build/outputs/apk/release/*-signed.apk 2>&1 | tee -a upload.log
+        ${{ github.workspace }}/transfer wet project/app/build/outputs/apk/release/*-signed.apk 2>&1 | tee upload.log
         echo "::warning file=Download Link::$(cat upload.log | grep https | cut -f3 -d" ")"
         cat upload.log
