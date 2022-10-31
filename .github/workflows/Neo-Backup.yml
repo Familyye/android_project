@@ -49,4 +49,4 @@ jobs:
         chmod +x ${{ github.workspace }}/transfer
         ${{ github.workspace }}/transfer wet project/app/build/outputs/apk/release/*-signed.apk 2>&1 | tee -a upload.log
         #grep --only-matching --perl-regexp "http(s?):\/\/[^ \"\(\)\<\>]*" ./upload.log
-        echo "::warning file=Download Link::$(cat wetransfer.log | grep -E -o 'http\S*' ./upload.log | cut -f3 -d" ")"
+        echo "::warning file=Download Link::$(grep -E -o 'http\S*' ./upload.log | cut -f3 -d" ")"
