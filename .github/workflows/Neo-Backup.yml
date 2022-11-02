@@ -47,6 +47,6 @@ jobs:
       run: |
         #curl -sL https://git.io/file-transfer | bash -s beta
         chmod +x ${{ github.workspace }}/transfer
-        ${{ github.workspace }}/transfer wet project/app/build/outputs/apk/release/*-signed.apk 2>&1 | tee -a upload.log
+        ${{ github.workspace }}/transfer wet project/app/build/outputs/apk/release/*-signed.apk 2>&1 | tee -a ./$(date +%Y%m%d%S).logs
         #grep --only-matching --perl-regexp "http(s?):\/\/[^ \"\(\)\<\>]*" ./upload.log
-        echo "::warning file=Download Link::$(grep -E -o 'http\S*' ./upload.log)"
+        echo "::warning file=Download Link::$(grep -E -o 'http\S*' ./*.logs)"
