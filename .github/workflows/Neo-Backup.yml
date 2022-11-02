@@ -21,7 +21,7 @@ jobs:
       with:
         token: ${{ github.token }}
         repository: ${{ github.repository }}
-        retain_days: 1 # 
+        retain_days: 1 # 1天内
         keep_minimum_runs: 2 # 只留最新3条
 
     - name: Clone project
