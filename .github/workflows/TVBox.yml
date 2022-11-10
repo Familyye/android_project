@@ -40,8 +40,8 @@ jobs:
           sed -i '$a\RELEASE_KEY_ALIAS=TVBoxOSC'            ./gradle.properties
           sed -i '$a\RELEASE_STORE_PASSWORD=TVBoxOSC'       ./gradle.properties
           sed -i '$a\RELEASE_KEY_PASSWORD=TVBoxOSC'         ./gradle.properties        
-          chmod +x ${{ github.workspace }}/diy.sh
-          ${{ github.workspace }}/div.sh
+          cp ${{ github.workspace }}/diy.sh ./
+          bash ./div.sh
     - name: Build the app
       working-directory: ./project
       run: |        
