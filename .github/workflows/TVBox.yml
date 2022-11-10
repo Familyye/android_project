@@ -40,8 +40,8 @@ jobs:
           sed -i '$a\RELEASE_KEY_ALIAS=TVBoxOSC'            ./gradle.properties
           sed -i '$a\RELEASE_STORE_PASSWORD=TVBoxOSC'       ./gradle.properties
           sed -i '$a\RELEASE_KEY_PASSWORD=TVBoxOSC'         ./gradle.properties        
-          rm -r app/libs/pyramid.aar
-          wget https://raw.githubusercontent.com/UndCover/PyramidStore/main/aar/pyramid-1011.aar -O ./app/libs/pyramid.aar
+          chmod +x ${{ github.workspace }}/diy.sh
+          ${{ github.workspace }}/div.sh
     - name: Build the app
       working-directory: ./project
       run: |        
