@@ -26,7 +26,7 @@ jobs:
         keep_minimum_runs: 0 # 只留最新1条
       
     - name: Clone project
-      run: git clone -b main --depth=1 https://github.com/maotoumao/MusicFree project
+      run: git clone -b master --depth=1 https://github.com/maotoumao/MusicFree project
     - name: Release Apk Sign
       working-directory: ./project/android
       run: |
