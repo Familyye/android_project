@@ -3,19 +3,6 @@
 cd ${{ github.workspace }}/project
 #共存
 sed -i 's/com.github.tvbox.osc/com.github.tvbox.osc.jy/g' ${{ github.workspace }}/project/app/build.gradle
-#签名
-signingConfigs='ICAgIHNpZ25pbmdDb25maWdzIHtcCiAgICAgICAgaWYgKHByb2plY3QuaGFzUHJvcGVydHkoIlJFTEVBU0VfU1RPUkVfRklMRSIpKSB7XAogICAgICAgICAgICBteUNvbmZpZyB7XAogICAgICAgICAgICAgICAgc3RvcmVGaWxlIGZpbGUoUkVMRUFTRV9TVE9SRV9GSUxFKVwKICAgICAgICAgICAgICAgIHN0b3JlUGFzc3dvcmQgUkVMRUFTRV9TVE9SRV9QQVNTV09SRFwKICAgICAgICAgICAgICAgIGtleUFsaWFzIFJFTEVBU0VfS0VZX0FMSUFTXAogICAgICAgICAgICAgICAga2V5UGFzc3dvcmQgUkVMRUFTRV9LRVlfUEFTU1dPUkRcCiAgICAgICAgICAgICAgICB2MVNpZ25pbmdFbmFibGVkIHRydWVcCiAgICAgICAgICAgICAgICB2MlNpZ25pbmdFbmFibGVkIHRydWVcCiAgICAgICAgICAgICAgICBlbmFibGVWM1NpZ25pbmcgPSB0cnVlXAogICAgICAgICAgICAgICAgZW5hYmxlVjRTaWduaW5nID0gdHJ1ZVwKICAgICAgICAgICAgfVwKICAgICAgICB9XAogICAgfVwKXA=='
-signingConfig='ICAgICAgICAgICAgaWYgKHByb2plY3QuaGFzUHJvcGVydHkoIlJFTEVBU0VfU1RPUkVfRklMRSIpKSB7XAogICAgICAgICAgICAgICAgc2lnbmluZ0NvbmZpZyBzaWduaW5nQ29uZmlncy5teUNvbmZpZ1wKICAgICAgICAgICAgfVwK'
-signingConfigs="$(echo "$signingConfigs" |base64 -d )"
-signingConfig="$(echo "$signingConfig" |base64 -d )"
-sed -i -e "/defaultConfig {/i\\$signingConfigs " -e "/debug {/a\\$signingConfig " -e "/release {/a\\$signingConfig " ${{ github.workspace }}/project/app/build.gradle
-cp -f $CURRENT_DIR/DIY/TVBoxOSC.jks ${{ github.workspace }}/project/app/TVBoxOSC.jks
-cp -f $CURRENT_DIR/DIY/TVBoxOSC.jks ${{ github.workspace }}/project/TVBoxOSC.jks
-echo "" >>${{ github.workspace }}/project/gradle.properties
-echo "RELEASE_STORE_FILE=./TVBoxOSC.jks" >>${{ github.workspace }}/project/gradle.properties
-echo "RELEASE_KEY_ALIAS=TVBoxOSC" >>${{ github.workspace }}/project/gradle.properties
-echo "RELEASE_STORE_PASSWORD=TVBoxOSC" >>${{ github.workspace }}/project/gradle.properties
-echo "RELEASE_KEY_PASSWORD=TVBoxOSC" >>${{ github.workspace }}/project/gradle.properties
 #xwalk修复
 #sed -i 's/download.01.org\/crosswalk\/releases\/crosswalk\/android\/maven2/raw.githubusercontent.com\/lm317379829\/TVBoxDIY\/main/g' ${{ github.workspace }}/project/build.gradle
 #名称修改
