@@ -36,10 +36,10 @@ jobs:
           signingConfig="$(echo "$signingConfig" |base64 -d )"
           sed -i -e "/defaultConfig {/i\\$signingConfigs " -e "/debug {/a\\$signingConfig " -e "/release {/a\\$signingConfig " android/app/build.gradle
           cp -f ${{ github.workspace }}/.github/workflows/Android.jks android/app/Android.jks
-          sed -i '$a\RELEASE_STORE_FILE=./Android.jks'     ./gradle.properties
-          sed -i '$a\RELEASE_KEY_ALIAS=Android'            ./gradle.properties
-          sed -i '$a\RELEASE_STORE_PASSWORD=Android'       ./gradle.properties
-          sed -i '$a\RELEASE_KEY_PASSWORD=Android'         ./gradle.properties        
+          sed -i '$a\RELEASE_STORE_FILE=./Android.jks'     ./android/gradle.properties
+          sed -i '$a\RELEASE_KEY_ALIAS=Android'            ./android/gradle.properties
+          sed -i '$a\RELEASE_STORE_PASSWORD=Android'       ./android/gradle.properties
+          sed -i '$a\RELEASE_KEY_PASSWORD=Android'         ./android/gradle.properties        
           
     - name: Build the app
       working-directory: ./project
@@ -51,6 +51,6 @@ jobs:
       run: |
         #curl -sL https://git.io/file-transfer | bash -s beta
         chmod +x ${{ github.workspace }}/transfer
-        ${{ github.workspace }}/transfer wet project/app/build/outputs/apk/release/*.apk 2>&1 | tee -a upload.log
+        ${{ github.workspace }}/transfer wet project/android/app/build/outputs/apk/release/*.apk 2>&1 | tee -a upload.log
         #grep --only-matching --perl-regexp "http(s?):\/\/[^ \"\(\)\<\>]*" ./upload.log
         echo "::warning file=Download Link::$(grep -E -o 'http\S*' ./upload.log)"
