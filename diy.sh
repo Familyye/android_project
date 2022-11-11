@@ -1,10 +1,9 @@
 #!/bin/bash
 
-
 #共存
 sed -i 's/com.github.tvbox.osc/com.github.tvbox.osc.jy/g' app/build.gradle
 #xwalk修复
-#sed -i 's/download.01.org\/crosswalk\/releases\/crosswalk\/android\/maven2/raw.githubusercontent.com\/lm317379829\/TVBoxDIY\/main/g' build.gradle
+sed -i 's/home.jundie.top:81\/xwalk\/maven2/raw.githubusercontent.com\/lm317379829\/TVBoxDIY\/main/g' build.gradle
 #名称修改
 #sed -i 's/TVBox/极影视/g' app/src/main/res/values/strings.xml
 #图标修改
