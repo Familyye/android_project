@@ -11,7 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: set up JDK 16
-      uses: actions/setup-java@min
+      uses: actions/setup-java@main
       with:
         java-version: '16'
         distribution: 'temurin'
