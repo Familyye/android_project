@@ -40,7 +40,7 @@ jobs:
           sed -i '$a\RELEASE_KEY_ALIAS=Android'            ./gradle.properties
           sed -i '$a\RELEASE_STORE_PASSWORD=Android'       ./gradle.properties
           sed -i '$a\RELEASE_KEY_PASSWORD=Android'         ./gradle.properties        
-          
+          rm -rf app/src/main/assets/x86_64
     - name: Build the app
       working-directory: ./project
       run: |        
