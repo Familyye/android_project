@@ -22,8 +22,11 @@ jobs:
       with:
         token: ${{ github.token }}
         repository: ${{ github.repository }}
-        retain_days: 0 # 只留1条
-        keep_minimum_runs: 0 # 只留最新1条
+        retain_days: 0 
+        #The number of days that is used to compare with the retention days of each workflow.
+        keep_minimum_runs: 2 
+        #The minimum runs to keep for each workflow.
+
       
     - name: Clone project
       run: git clone -b main --depth=1 https://github.com/q215613905/TVBoxOS project
