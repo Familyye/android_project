@@ -29,7 +29,7 @@ jobs:
 
       
     - name: Clone project
-      run: git clone -b release --depth=1 https://github.com/FongMi/TV project
+      run: git clone -b main --depth=1 https://github.com/UndCover/Pyramid project
     - name: Release Apk Sign
       working-directory: ./project
       run: |
