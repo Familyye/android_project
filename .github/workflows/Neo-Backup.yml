@@ -23,7 +23,7 @@ jobs:
         repository: ${{ github.repository }}
         retain_days: 0 
         #The number of days that is used to compare with the retention days of each workflow.
-        keep_minimum_runs: 0 
+        keep_minimum_runs: 1 
         #The minimum runs to keep for each workflow.
 
     - name: Clone project
