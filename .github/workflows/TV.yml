@@ -33,7 +33,8 @@ jobs:
     - name: Build the app
       working-directory: ./project
       run: |          
-        sed -i '21d' settings.gradle      
+        sed -i '21d' settings.gradle
+        sed -i '63d' ./app/build.gradle      
         #sed -i 's/\/exo\/core_settings.gradle/.\/exo\/core_settings.gradle/g' settings.gradle
         cp -r gradle.properties local.properties
         chmod +x gradlew
