@@ -36,13 +36,13 @@ jobs:
     - name: Build the app
       working-directory: ./project
       run: |          
-        #sed -i '21d' settings.gradle
-        #sed -i '63d' ./app/build.gradle
+        sed -i '21d' settings.gradle
+        sed -i '63d' ./app/build.gradle
         sed -i 's/C:\/Users\/FongMi.DIREK\/Anaconda3\/envs\/py38\/python.exe/python/g' pyramid/build.gradle      
         sed -i 's/\/exo\/core_settings.gradle/.\/exo\/core_settings.gradle/g' settings.gradle
         cp -r gradle.properties local.properties
         chmod +x gradlew
-        ./gradlew assembledebug
+        ./gradlew assemblerelease
 
     - uses: mymine/sign-android-release@master
       name: Sign APK
