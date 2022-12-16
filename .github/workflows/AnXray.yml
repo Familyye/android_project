@@ -31,7 +31,7 @@ jobs:
     - name: Build the app
       working-directory: ./project
       run: |                
-        sed -i 's/Neo Backup/NeoBackup/g' app/src/main/res/values/strings.xml
+        #sed -i 's/Neo Backup/NeoBackup/g' app/src/main/res/values/strings.xml
         chmod +x gradlew
         ./gradlew assemblerelease
 
