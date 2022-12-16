@@ -34,6 +34,7 @@ jobs:
       working-directory: ./project
       run: |                
         sed -i 's/\/exo\/core_settings.gradle/.\/exo\/core_settings.gradle/g' settings.gradle
+        cp -r gradle.properties local.properties
         chmod +x gradlew
         ./gradlew assemblerelease
 
