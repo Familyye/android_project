@@ -33,6 +33,7 @@ jobs:
       run: |
         git clone -b release --depth=1 https://github.com/FongMi/TV project
         #git clone --depth=1 https://github.com/google/ExoPlayer project/exo
+        rm -rf release
     - name: Build the app
       working-directory: ./project
       run: |          
