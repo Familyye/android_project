@@ -33,7 +33,7 @@ jobs:
     - name: Build the app
       working-directory: ./project
       run: |                
-        sed -i 's/\/exo\/core_settings.gradle/.\/exo\/coore_settings.gradle/g' settings.gradle
+        sed -i 's/\/exo\/core_settings.gradle/.\/exo\/core_settings.gradle/g' settings.gradle
         chmod +x gradlew
         ./gradlew assemblerelease
 
