@@ -1,4 +1,4 @@
-name: AnXray
+name: TV
 
 on:
   workflow_dispatch:
@@ -27,7 +27,9 @@ jobs:
         #The minimum runs to keep for each workflow.
 
     - name: Clone project
-      run: git clone --depth=1 https://github.com/magician8520/AnXray project
+      run: |
+        git clone --depth=1 -b dev https://github.com/FongMi/TV project
+        git clone --depth=1 https://github.com/google/ExoPlayer project/exo
     - name: Build the app
       working-directory: ./project
       run: |                
