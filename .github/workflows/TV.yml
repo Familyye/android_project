@@ -32,7 +32,8 @@ jobs:
         #git clone --depth=1 https://github.com/google/ExoPlayer project/exo
     - name: Build the app
       working-directory: ./project
-      run: |                
+      run: |          
+        sed -i '21d' settings.gradle      
         #sed -i 's/\/exo\/core_settings.gradle/.\/exo\/core_settings.gradle/g' settings.gradle
         cp -r gradle.properties local.properties
         chmod +x gradlew
