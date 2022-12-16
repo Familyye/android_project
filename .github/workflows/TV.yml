@@ -15,7 +15,10 @@ jobs:
       with:
         java-version: '16'
         distribution: 'temurin'
-      
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10" 
     - name: Delete workflows
       uses: Mattraks/delete-workflow-runs@v2
       with:
@@ -28,14 +31,14 @@ jobs:
 
     - name: Clone project
       run: |
-        git clone -b release --depth=1 https://github.com/FongMi/TV project
-        #git clone --depth=1 https://github.com/google/ExoPlayer project/exo
+        git clone -b dev --depth=1 https://github.com/FongMi/TV project
+        git clone --depth=1 https://github.com/google/ExoPlayer project/exo
     - name: Build the app
       working-directory: ./project
       run: |          
-        sed -i '21d' settings.gradle
-        sed -i '63d' ./app/build.gradle      
-        #sed -i 's/\/exo\/core_settings.gradle/.\/exo\/core_settings.gradle/g' settings.gradle
+        #sed -i '21d' settings.gradle
+        #sed -i '63d' ./app/build.gradle      
+        sed -i 's/\/exo\/core_settings.gradle/.\/exo\/core_settings.gradle/g' settings.gradle
         cp -r gradle.properties local.properties
         chmod +x gradlew
         ./gradlew assemblerelease
