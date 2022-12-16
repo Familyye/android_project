@@ -44,14 +44,8 @@ jobs:
         cp -r gradle.properties local.properties
         chmod +x gradlew
         ./gradlew assemblerelease
-
-
-
-    - name: Upload file to file.io
-      id: fileio
-      run: |
-        #curl -sL https://git.io/file-transfer | bash -s beta
-        chmod +x ${{ github.workspace }}/transfer
-        ${{ github.workspace }}/transfer wet ./**/*.apk 2>&1 | tee -a ./upload.logs
-        #grep --only-matching --perl-regexp "http(s?):\/\/[^ \"\(\)\<\>]*" ./upload.log
-        echo "::warning file=Download Link::$(grep -E -o 'http\S*' ./*.logs)"
+    - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: my-build-apk
+          path: ./**/*.apk
