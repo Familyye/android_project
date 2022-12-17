@@ -31,8 +31,8 @@ jobs:
 
     - name: Clone project
       run: |
-        git clone -b release --depth=1 https://github.com/FongMi/TV project
-        #git clone --depth=1 https://github.com/google/ExoPlayer project/exo
+        git clone -b dev --depth=1 https://github.com/FongMi/TV project
+        git clone --depth=1 https://github.com/google/ExoPlayer project/exo
         rm -rf project/release
         find -name python 2>&1 
     - name: Build the app
@@ -40,7 +40,7 @@ jobs:
       run: |          
         sed -i '22,24d' ./app/build.gradle
         sed -i 's/C:\/Users\/FongMi.DIREK\/Anaconda3\/envs\/py38\/python.exe/python/g' pyramid/build.gradle      
-        #sed -i 's/\/exo\/core_settings.gradle/.\/exo\/core_settings.gradle/g' settings.gradle
+        sed -i 's/\/exo\/core_settings.gradle/.\/exo\/core_settings.gradle/g' settings.gradle
         cp -r gradle.properties local.properties
         chmod +x gradlew
         ./gradlew assemblerelease
