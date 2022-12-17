@@ -46,8 +46,8 @@ jobs:
         cp -r gradle.properties local.properties
         chmod +x gradlew
         ./gradlew assemblerelease
-        cp ${{ github.workspace }}/app/build/outputs/apk/leanbackJava/release/* ${{ github.workspace }}/app/build/outputs/apk/release
-        cp ${{ github.workspace }}/app/build/outputs/apk/leanbackPython/release/* ${{ github.workspace }}/app/build/outputs/apk/release
+        cp ${{ github.workspace }}/project/app/build/outputs/apk/leanbackJava/release/* ${{ github.workspace }}/project/app/build/outputs/apk/release
+        cp ${{ github.workspace }}/project/app/build/outputs/apk/leanbackPython/release/* ${{ github.workspace }}/project/app/build/outputs/apk/release
 
         
     - uses: mymine/sign-android-release@master
