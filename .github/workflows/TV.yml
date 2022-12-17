@@ -37,7 +37,8 @@ jobs:
         find -name python 2>&1 
     - name: Build the app
       working-directory: ./project
-      run: |          
+      run: |
+        sed -i '76d' app/src/main/java/com/fongmi/android/tv/player/ExoUtil.java        
         sed -i '22,24d' ./app/build.gradle
         sed -i 's/C:\/Users\/FongMi.DIREK\/Anaconda3\/envs\/py38\/python.exe/python/g' pyramid/build.gradle      
         sed -i 's/\/exo\/core_settings.gradle/.\/exo\/core_settings.gradle/g' settings.gradle
