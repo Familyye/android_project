@@ -33,7 +33,7 @@ jobs:
       run: |
         git clone -b release --depth=1 https://github.com/FongMi/TV project
         #git clone --depth=1 https://github.com/google/ExoPlayer project/exo
-        rm -rf release
+        rm -rf project/release
     - name: Build the app
       working-directory: ./project
       run: |          
@@ -49,4 +49,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: my-build-apk
-        path: ./**/*.apk
+        path: ./project/app/build/outputs/apk/**/*.apk
