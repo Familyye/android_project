@@ -32,8 +32,10 @@ jobs:
           sed -i '$a\RELEASE_KEY_ALIAS=TVBoxOSC'            ./gradle.properties
           sed -i '$a\RELEASE_STORE_PASSWORD=TVBoxOSC'       ./gradle.properties
           sed -i '$a\RELEASE_KEY_PASSWORD=TVBoxOSC'         ./gradle.properties        
-          cp ${{ github.workspace }}/diy.sh ./div.sh
-          bash ./div.sh
+          #cp ${{ github.workspace }}/diy.sh ./div.sh
+          #bash ./div.sh
+          #共存
+          sed -i 's/com.github.tvbox.osc/com.github.tvbox.osc.jy/g' app/build.gradle
     - name: Build the app
       working-directory: ./project
       run: |        
