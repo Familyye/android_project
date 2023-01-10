@@ -1,4 +1,4 @@
-	name: Godmode
+name: Godmode
 
 on:
   workflow_dispatch:
