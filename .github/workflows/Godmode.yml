@@ -1,4 +1,4 @@
-name: Godmode
+	name: Godmode
 
 on:
   workflow_dispatch:
@@ -45,10 +45,10 @@ jobs:
           sed -i '$a\RELEASE_KEY_PASSWORD=TVBoxOSC'         ./gradle.properties        
     - name: Build the app
       working-directory: ./project
-    - name: Install dependencies
-      run: git submodule update --init --recursive
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+      run: |        
+        git submodule update --init --recursive
+        chmod +x gradlew
+        ./gradlew build
     - name: Upload file to file.io
       id: fileio
       run: |
