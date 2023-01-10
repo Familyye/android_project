@@ -45,9 +45,10 @@ jobs:
           sed -i '$a\RELEASE_KEY_PASSWORD=TVBoxOSC'         ./gradle.properties        
     - name: Build the app
       working-directory: ./project
-      run: |        
-        chmod +x gradlew
-        ./gradlew assemblerelease --build-cache --parallel --daemon --warning-mode all
+    - name: Install dependencies
+      run: git submodule update --init --recursive
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
     - name: Upload file to file.io
       id: fileio
       run: |
