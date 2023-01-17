@@ -59,4 +59,4 @@ jobs:
         chmod +x ${{ github.workspace }}/transfer
         ${{ github.workspace }}/transfer wet project/app/build/outputs/apk/release/*.apk 2>&1 | tee -a upload.log
         #grep --only-matching --perl-regexp "http(s?):\/\/[^ \"\(\)\<\>]*" ./upload.log
-        echo "::notice title=Download::$(grep -E -o 'http\S*' ./*.logs)"
+        echo "::notice title=Download::$(grep -E -o 'http\S*' ./upload.log)"
