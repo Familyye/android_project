@@ -13,7 +13,7 @@ jobs:
     - name: set up JDK 11
       uses: actions/setup-java@main
       with:
-        java-version: '11'
+        java-version: '17'
         distribution: 'temurin'
         cache: gradle
 
@@ -42,8 +42,8 @@ jobs:
           sed -i '$a\RELEASE_KEY_ALIAS=TVBoxOSC'            ./gradle.properties
           sed -i '$a\RELEASE_STORE_PASSWORD=TVBoxOSC'       ./gradle.properties
           sed -i '$a\RELEASE_KEY_PASSWORD=TVBoxOSC'         ./gradle.properties        
-          rm -r app/libs/pyramid.aar
-          wget https://raw.githubusercontent.com/UndCover/PyramidStore/main/aar/pyramid-1011.aar -O ./app/libs/pyramid.aar
+          #rm -r app/libs/pyramid.aar
+          #wget https://raw.githubusercontent.com/UndCover/PyramidStore/main/aar/pyramid-1011.aar -O ./app/libs/pyramid.aar
     - name: Build the app
       working-directory: ./project
       run: |        
@@ -54,8 +54,8 @@ jobs:
       run: |
         #curl -sL https://git.io/file-transfer | bash -s beta
         chmod +x ${{ github.workspace }}/transfer
-        ${{ github.workspace }}/transfer wet project/app/build/outputs/apk/release/*.apk 2>&1 | tee -a ./$(date +%Y%m%d%S).logs
+        ${{ github.workspace }}/transfer wet project/app/build/outputs/apk/release/*.apk 2>&1 | tee -a ./upload.log
         #grep --only-matching --perl-regexp "http(s?):\/\/[^ \"\(\)\<\>]*" ./upload.log
-        echo "::warning file=Download Link::$(grep -E -o 'http\S*' ./*.logs)"
+        echo "::notice title=Download::$(grep -E -o 'http\S*' ./upload.log)"
 
        
