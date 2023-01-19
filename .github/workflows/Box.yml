@@ -42,7 +42,7 @@ jobs:
           sed -i '$a\RELEASE_KEY_ALIAS=TVBoxOSC'            ./gradle.properties
           sed -i '$a\RELEASE_STORE_PASSWORD=TVBoxOSC'       ./gradle.properties
           sed -i '$a\RELEASE_KEY_PASSWORD=TVBoxOSC'         ./gradle.properties        
-          sed -i 's/gradle:4.2.2/gradle:8.0-rc-2/g' build.gradle
+          sed -i 's/6.7.1/8.0-rc-2/g' gradle/wrapper/gradle-wrapper.properties
     - name: Build the app
       working-directory: ./project
       run: |        
