@@ -44,8 +44,7 @@ jobs:
           sed -i '$a\RELEASE_KEY_ALIAS=Android'            ./gradle.properties
           sed -i '$a\RELEASE_STORE_PASSWORD=Android'       ./gradle.properties
           sed -i '$a\RELEASE_KEY_PASSWORD=Android'         ./gradle.properties        
-          sed -i 's/gradle-.*/gradle-7.6-bin.zip/g' gradle/wrapper/gradle-wrapper.properties
-
+          #sed -i 's/gradle-.*/gradle-7.6-bin.zip/g' gradle/wrapper/gradle-wrapper.properties
     - name: Build the app
       working-directory: ./project
       run: |        
