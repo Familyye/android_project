@@ -44,7 +44,7 @@ jobs:
           sed -i 's/gradle-.*/gradle-7.6-bin.zip/g' gradle/wrapper/gradle-wrapper.properties
     - uses: actions/checkout@v3
     - name: set up JDK 11
-      working-directory: ./project
+     
       uses: actions/setup-java@v3.9.0
       with:
         java-version: '17'
