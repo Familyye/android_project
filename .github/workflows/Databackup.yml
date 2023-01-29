@@ -26,7 +26,7 @@ jobs:
         #The minimum runs to keep for each workflow.
 
     - name: Clone project
-      run: git clone -b mine --depth=1 https://github.com/XayahSuSuSu/Android-DataBackup project
+      run: git clone -b main --depth=1 https://github.com/XayahSuSuSu/Android-DataBackup project
     - name: Build the app
       working-directory: ./project
       run: |                
