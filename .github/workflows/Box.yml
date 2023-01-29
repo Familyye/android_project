@@ -32,13 +32,14 @@ jobs:
     - name: Release Apk Sign
       working-directory: ./project
       run: |                           
-          sed -i 's/gradle-.*/gradle-7.6-bin.zip/g' gradle/wrapper/gradle-wrapper.properties
+        sed -i 's/gradle-.*/gradle-7.6-bin.zip/g' gradle/wrapper/gradle-wrapper.properties
     - name: Build the app
       working-directory: ./project
       run: |        
         chmod +x gradlew
         ./gradlew assemblerelease --build-cache --parallel --daemon --warning-mode all
-	    - uses: mymine/sign-android-release@master
+	    
+    - uses: mymine/sign-android-release@master
       name: Sign APK
       with:
         releaseDirectory: project/app/build/outputs/apk/release
