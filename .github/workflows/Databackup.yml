@@ -15,7 +15,6 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
-        cache: 'gradle'
     - name: Delete workflows
       uses: Mattraks/delete-workflow-runs@v2
       with:
