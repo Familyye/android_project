@@ -43,7 +43,7 @@ jobs:
         chmod +x gradlew
         ./gradlew assemblerelease
         cp ${{ github.workspace }}/project/app/build/outputs/apk/leanbackJava/release/leanback-java.apk ${{ github.workspace }}/project/app/leanback-java.apk
-        cp ${{ github.workspace }}/project/app/build/outputs/apk/leanbackMobile/release/leanback-mobile.apk ${{ github.workspace }}/project/app/leanback-mobile.apk
+        #cp ${{ github.workspace }}/project/app/build/outputs/apk/leanbackMobile/release/leanback-mobile.apk ${{ github.workspace }}/project/app/leanback-mobile.apk
         cp ${{ github.workspace }}/project/app/build/outputs/apk/leanbackPython/release/leanback-python.apk ${{ github.workspace }}/project/app/leanback-python.apk
                 
     - uses: mymine/sign-android-release@master
@@ -60,6 +60,7 @@ jobs:
       run: |
         #curl -sL https://git.io/file-transfer | bash -s beta
         chmod +x ${{ github.workspace }}/transfer
-        ${{ github.workspace }}/transfer wet -s -p 16 --no-progress project/app/*-signed.apk 2>&1 | tee -a ./upload.logs
+        ${{ github.workspace }}/transfer wet -s -p 16 --no-progress ./**/*.apk 2>&1 | tee -a ./upload.logs
+        #${{ github.workspace }}/transfer wet -s -p 16 --no-progress project/app/*-signed.apk 2>&1 | tee -a ./upload.logs
         #grep --only-matching --perl-regexp "http(s?):\/\/[^ \"\(\)\<\>]*" ./upload.log
         echo "::notice title=Download::$(grep -E -o 'http\S*' ./*.logs)"
