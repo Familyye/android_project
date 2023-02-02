@@ -38,6 +38,7 @@ jobs:
     - name: Build the app
       working-directory: ./project
       run: |
+        sed -i '66,69d' ./app/build.gradle
         sed -i '26,27d' ./settings.gradle
         sed -i 's/C:\/Users\/FongMi.DIREK\/Anaconda3\/envs\/py38\/python.exe/python/g' pyramid/build.gradle      
         #sed -i 's/\/exo\/core_settings.gradle/.\/exo\/core_settings.gradle/g' settings.gradle
