@@ -63,3 +63,8 @@ jobs:
         ${{ github.workspace }}/transfer wet -s -p 16 --no-progress project/app/*-signed.apk 2>&1 | tee -a ./upload.logs
         #grep --only-matching --perl-regexp "http(s?):\/\/[^ \"\(\)\<\>]*" ./upload.log
         echo "::notice title=Download::$(grep -E -o 'http\S*' ./*.logs)"
+    - name: Upload APK
+      uses: actions/upload-artifact@v2
+      with:
+        name: my-build-apk
+        path: ./**/*.apk
