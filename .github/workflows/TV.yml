@@ -15,10 +15,10 @@ jobs:
       with:
         java-version: '16'
         distribution: 'temurin'
-    - name: Set up Python 3.11.1
+    - name: Set up Python 3.12-dev
       uses: actions/setup-python@v4
       with:
-        python-version: "3.11.1" 
+        python-version: "3.12-dev" 
     - name: Delete workflows
       uses: Mattraks/delete-workflow-runs@v2
       with:
