@@ -16,7 +16,7 @@ jobs:
         java-version: '16'
         distribution: 'temurin'
     - name: Set up Python 3.12-dev
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v4.5.0
       with:
         python-version: "3.12-dev" 
     - name: Delete workflows
