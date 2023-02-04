@@ -37,14 +37,13 @@ jobs:
     - name: Build the app
       working-directory: ./project
       run: |
-        sed -i '65d' app/build.gradle
-        sed -i '28,30d' app/build.gradle
+        
         sed -i 's/C:\/Users\/FongMi.DIREK\/Anaconda3\/envs\/py38\/python.exe/python/g' pyramid/build.gradle      
         #sed -i 's/\/exo\/core_settings.gradle/.\/exo\/core_settings.gradle/g' settings.gradle
         cp -r gradle.properties local.properties
         chmod +x gradlew
         ./gradlew assemblerelease
-        cp ${{ github.workspace }}/project/app/build/outputs/apk/*/*.apk ${{ github.workspace }}/project/app/
+        #cp ${{ github.workspace }}/project/app/build/outputs/apk/*/*.apk ${{ github.workspace }}/project/app/
         #cp ${{ github.workspace }}/project/app/build/outputs/apk/leanbackJava/release/leanback-java.apk ${{ github.workspace }}/project/app/leanback-java.apk
         #cp ${{ github.workspace }}/project/app/build/outputs/apk/leanbackPython/release/leanback-python.apk ${{ github.workspace }}/project/app/leanback-python.apk
         #cp ${{ github.workspace }}/project/app/build/outputs/apk/mobileJava/release/mobile-java.apk ${{ github.workspace }}/project/app/mobile-java.apk
