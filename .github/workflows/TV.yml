@@ -42,10 +42,11 @@ jobs:
         cp -r gradle.properties local.properties
         chmod +x gradlew
         ./gradlew assemblerelease
-        cp ${{ github.workspace }}/project/app/build/outputs/apk/leanbackJava/release/leanback-java.apk ${{ github.workspace }}/project/app/leanback-java.apk
-        cp ${{ github.workspace }}/project/app/build/outputs/apk/leanbackPython/release/leanback-python.apk ${{ github.workspace }}/project/app/leanback-python.apk
-        cp ${{ github.workspace }}/project/app/build/outputs/apk/mobileJava/release/mobile-java.apk ${{ github.workspace }}/project/app/mobile-java.apk
-        cp ${{ github.workspace }}/project/app/build/outputs/apk/mobilePython/release/mobile-python.apk ${{ github.workspace }}/project/app/mobile-python.apk        
+        cp ./**/*.apk ${{ github.workspace }}/project/app/
+        #cp ${{ github.workspace }}/project/app/build/outputs/apk/leanbackJava/release/leanback-java.apk ${{ github.workspace }}/project/app/leanback-java.apk
+        #cp ${{ github.workspace }}/project/app/build/outputs/apk/leanbackPython/release/leanback-python.apk ${{ github.workspace }}/project/app/leanback-python.apk
+        #cp ${{ github.workspace }}/project/app/build/outputs/apk/mobileJava/release/mobile-java.apk ${{ github.workspace }}/project/app/mobile-java.apk
+        #cp ${{ github.workspace }}/project/app/build/outputs/apk/mobilePython/release/mobile-python.apk ${{ github.workspace }}/project/app/mobile-python.apk        
     - uses: mymine/sign-android-release@master
       name: Sign APK
       with:
