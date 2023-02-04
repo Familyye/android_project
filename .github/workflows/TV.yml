@@ -9,14 +9,14 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-    - uses: actions/checkout@v3.3.0
+    - uses: actions/checkout@v3
     - name: set up JDK 16
       uses: actions/setup-java@main
       with:
         java-version: '16'
         distribution: 'temurin'
     - name: Set up Python 3.11.1
-      uses: actions/setup-python@v4.5.0
+      uses: actions/setup-python@v4
       with:
         python-version: "3.11.1" 
     - name: Delete workflows
@@ -33,20 +33,19 @@ jobs:
       run: |
         git clone -b release --depth=1 https://github.com/mymine/TV project        
         rm -rf project/release
+        sed -i 's/C:\/Users\/FongMi.DIREK\/Anaconda3\/envs\/py38\/python.exe/python/g' pyramid/build.gradle      
+        #sed -i 's/\/exo\/core_settings.gradle/.\/exo\/core_settings.gradle/g' settings.gradle
+        cp -r gradle.properties local.properties
 
     - name: Build the app
       working-directory: ./project
       run: |        
-        sed -i 's/C:\/Users\/FongMi.DIREK\/Anaconda3\/envs\/py38\/python.exe/python/g' pyramid/build.gradle      
-        #sed -i 's/\/exo\/core_settings.gradle/.\/exo\/core_settings.gradle/g' settings.gradle
-        cp -r gradle.properties local.properties
         chmod +x gradlew
         ./gradlew assemblerelease
-        cp ./**/*.apk ${{ github.workspace }}/project/app/
-        #cp ${{ github.workspace }}/project/app/build/outputs/apk/leanbackJava/release/leanback-java.apk ${{ github.workspace }}/project/app/leanback-java.apk
-        #cp ${{ github.workspace }}/project/app/build/outputs/apk/leanbackPython/release/leanback-python.apk ${{ github.workspace }}/project/app/leanback-python.apk
-        #cp ${{ github.workspace }}/project/app/build/outputs/apk/mobileJava/release/mobile-java.apk ${{ github.workspace }}/project/app/mobile-java.apk
-        #cp ${{ github.workspace }}/project/app/build/outputs/apk/mobilePython/release/mobile-python.apk ${{ github.workspace }}/project/app/mobile-python.apk        
+        cp ${{ github.workspace }}/project/app/build/outputs/apk/leanbackJava/release/leanback-java.apk ${{ github.workspace }}/project/app/leanback-java.apk
+        cp ${{ github.workspace }}/project/app/build/outputs/apk/leanbackPython/release/leanback-python.apk ${{ github.workspace }}/project/app/leanback-python.apk
+        cp ${{ github.workspace }}/project/app/build/outputs/apk/mobileJava/release/mobile-java.apk ${{ github.workspace }}/project/app/mobile-java.apk
+        cp ${{ github.workspace }}/project/app/build/outputs/apk/mobilePython/release/mobile-python.apk ${{ github.workspace }}/project/app/mobile-python.apk        
     - uses: mymine/sign-android-release@master
       name: Sign APK
       with:
