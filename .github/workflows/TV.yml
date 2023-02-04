@@ -16,7 +16,7 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
     - name: Set up Python 3.11.1
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v4.5.0
       with:
         python-version: "3.11.1" 
     - name: Delete workflows
@@ -33,14 +33,12 @@ jobs:
       run: |
         git clone -b release --depth=1 https://github.com/FongMi/TV project        
         rm -rf project/release
-
+        cd project       
+        sed -i 's/C:\/Users\/FongMi.DIREK\/Anaconda3\/envs\/py38\/python.exe/python/g' pyramid/build.gradle      
+        cp -r gradle.properties local.properties
     - name: Build the app
       working-directory: ./project
       run: |
-        
-        sed -i 's/C:\/Users\/FongMi.DIREK\/Anaconda3\/envs\/py38\/python.exe/python/g' pyramid/build.gradle      
-        #sed -i 's/\/exo\/core_settings.gradle/.\/exo\/core_settings.gradle/g' settings.gradle
-        cp -r gradle.properties local.properties
         chmod +x gradlew
         ./gradlew assemblerelease
         cp app/build/outputs/apk/*/release/*.apk app/
