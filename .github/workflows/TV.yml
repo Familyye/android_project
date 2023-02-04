@@ -43,11 +43,11 @@ jobs:
         cp -r gradle.properties local.properties
         chmod +x gradlew
         ./gradlew assemblerelease
-        #cp ${{ github.workspace }}/project/app/build/outputs/apk/*/*.apk ${{ github.workspace }}/project/app/
-        cp app/build/outputs/apk/leanbackJava/release/leanback-java.apk app/leanback-java.apk
-        cp app/build/outputs/apk/leanbackPython/release/leanback-python.apk app/leanback-python.apk
-        cp app/build/outputs/apk/mobileJava/release/mobile-java.apk app/mobile-java.apk
-        cp app/build/outputs/apk/mobilePython/release/mobile-python.apk app/mobile-python.apk        
+        cp app/build/outputs/apk/*/release/*.apk app/
+        #cp app/build/outputs/apk/leanbackJava/release/leanback-java.apk app/leanback-java.apk
+        #cp app/build/outputs/apk/leanbackPython/release/leanback-python.apk app/leanback-python.apk
+        #cp app/build/outputs/apk/mobileJava/release/mobile-java.apk app/mobile-java.apk
+        #cp app/build/outputs/apk/mobilePython/release/mobile-python.apk app/mobile-python.apk        
     - uses: mymine/sign-android-release@master
       name: Sign APK
       with:
