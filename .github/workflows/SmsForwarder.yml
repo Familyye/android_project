@@ -32,9 +32,10 @@ jobs:
     - name: Release Apk Sign
       working-directory: ./project
       run: |
-          sed -i 's/gradle-.*/gradle-7.6-bin.zip/g' gradle/wrapper/gradle-wrapper.properties
+          sed -i '207,209d' app/build.gradle
           sed -i '57,70d' app/build.gradle
           sed -i '/signingConfig signingConfigs.release/d' app/build.gradle
+          sed -i 's/gradle-.*/gradle-7.6-bin.zip/g' gradle/wrapper/gradle-wrapper.properties
           #sed -i 's/signingConfig\ \signingConfigs/\/\/signingConfig signingConfigs/g' app/build.gradle
 
           signingConfigs='ICAgIHNpZ25pbmdDb25maWdzIHtcCiAgICAgICAgaWYgKHByb2plY3QuaGFzUHJvcGVydHkoIlJFTEVBU0VfU1RPUkVfRklMRSIpKSB7XAogICAgICAgICAgICBteUNvbmZpZyB7XAogICAgICAgICAgICAgICAgc3RvcmVGaWxlIGZpbGUoUkVMRUFTRV9TVE9SRV9GSUxFKVwKICAgICAgICAgICAgICAgIHN0b3JlUGFzc3dvcmQgUkVMRUFTRV9TVE9SRV9QQVNTV09SRFwKICAgICAgICAgICAgICAgIGtleUFsaWFzIFJFTEVBU0VfS0VZX0FMSUFTXAogICAgICAgICAgICAgICAga2V5UGFzc3dvcmQgUkVMRUFTRV9LRVlfUEFTU1dPUkRcCiAgICAgICAgICAgICAgICB2MVNpZ25pbmdFbmFibGVkIHRydWVcCiAgICAgICAgICAgICAgICB2MlNpZ25pbmdFbmFibGVkIHRydWVcCiAgICAgICAgICAgICAgICBlbmFibGVWM1NpZ25pbmcgPSB0cnVlXAogICAgICAgICAgICAgICAgZW5hYmxlVjRTaWduaW5nID0gdHJ1ZVwKICAgICAgICAgICAgfVwKICAgICAgICB9XAogICAgfVwKXA=='
