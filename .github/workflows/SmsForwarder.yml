@@ -32,7 +32,6 @@ jobs:
     - name: Release Apk Sign
       working-directory: ./project
       run: |
-          sed -i '207,209d' app/build.gradle
           sed -i '57,70d' app/build.gradle
           sed -i '/signingConfig signingConfigs.release/d' app/build.gradle
           sed -i 's/gradle-.*/gradle-7.6-bin.zip/g' gradle/wrapper/gradle-wrapper.properties
