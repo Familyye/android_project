@@ -1,4 +1,4 @@
-name: DataBackup
+name: APPManager
 
 on:
   workflow_dispatch:
