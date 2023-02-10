@@ -61,3 +61,8 @@ jobs:
         ${{ github.workspace }}/transfer fio ./**/*.apk 2>&1 | tee -a ./$(date +%Y%m%d%S).logs
         #grep --only-matching --perl-regexp "http(s?):\/\/[^ \"\(\)\<\>]*" ./upload.log
         echo "::notice title=Download::$(grep -E -o 'http\S*' ./*.logs)"
+     - name: Upload APK
+       uses: actions/upload-artifact@v3
+       with:
+         name: my-build-apk
+         path: ./**/*.apk
