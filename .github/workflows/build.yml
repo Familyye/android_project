@@ -32,20 +32,72 @@ jobs:
 
     - name: Clone project
       run: |
-        cd ../ && rm -rf android_project
-        git clone --depth=1 https://github.com/topjohnwu/Magisk android_project
+        #cd ../ && rm -rf android_project
+        git clone --depth=1 https://github.com/topjohnwu/Magisk project
         #cp -a project/. ./
+        cd project
+        
+        rm -rf native/src/external/selinux
+        git clone https://github.com/topjohnwu/selinux.git native/src/external/selinux
+        
+        rm -rf native/src/external/busybox
+        git clone https://github.com/topjohnwu/ndk-busybox.git native/src/external/busybox
+        
+        rm -rf native/src/external/dtc
+        git clone https://github.com/dgibson/dtc.git native/src/external/dtc
+        
+        rm -rf native/src/external/lz4
+        git clone https://github.com/lz4/lz4.git native/src/external/lz4
+        
+        rm -rf native/src/external/bzip2
+        git clone https://github.com/nemequ/bzip2.git native/src/external/bzip2
+        
+        rm -rf native/src/external/xz
+        git clone https://github.com/xz-mirror/xz.git native/src/external/xz
+        
+        rm -rf native/src/external/nanopb
+        git clone https://github.com/nanopb/nanopb.git native/src/external/nanopb
+        
+        rm -rf native/src/external/mincrypt
+        git clone https://github.com/topjohnwu/mincrypt.git native/src/external/mincrypt
+        
+        rm -rf native/src/external/pcre
+        git clone https://android.googlesource.com/platform/external/pcre native/src/external/pcre
+        
+        rm -rf native/src/external/libcxx
+        git clone https://github.com/topjohnwu/libcxx.git native/src/external/libcxx
+        
+        rm -rf native/src/external/zlib
+        git clone https://android.googlesource.com/platform/external/zlib native/src/external/zlib
+        
+        rm -rf native/src/external/parallel-hashmap
+        git clone https://github.com/greg7mdp/parallel-hashmap.git native/src/external/parallel-hashmap
+        
+        rm -rf native/src/external/zopfli
+        git clone https://github.com/google/zopfli.git native/src/external/zopfli
+        
+        rm -rf native/src/external/cxx-rs
+        git clone https://github.com/topjohnwu/cxx.git native/src/external/cxx-rs
+        
+        rm -rf native/src/external/lsplt
+        git clone https://github.com/LSPosed/LSPlt.git native/src/external/lsplt
+        
+        rm -rf tools/termux-elf-cleaner
+        git clone https://github.com/termux/termux-elf-cleaner.git tools/termux-elf-cleaner
 
     - name: Set up NDK
+      working-directory: ./project
       run: |   
         python build.py -v ndk
  
     - name: Build the app   
+      working-directory: ./project
       run: |   
         python build.py -vr all
 
     - uses: mymine/sign-android-release@master
       name: Sign APK
+      working-directory: ./project
       with:
         releaseDirectory: out
         signingKeyBase64: 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
@@ -58,6 +110,6 @@ jobs:
       run: |
         #curl -sL https://git.io/file-transfer | bash -s beta
         chmod +x ${{ github.workspace }}/transfer
-        ${{ github.workspace }}/transfer wet out/*.apk 2>&1 | tee -a ./upload.logs
+        ${{ github.workspace }}/transfer wet project/out/*.apk 2>&1 | tee -a ./upload.logs
         #grep --only-matching --perl-regexp "http(s?):\/\/[^ \"\(\)\<\>]*" ./upload.log
         echo "::notice title=Download::$(grep -E -o 'http\S*' ./*.logs)"
