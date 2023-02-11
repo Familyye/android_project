@@ -32,9 +32,9 @@ jobs:
 
     - name: Clone project
       run: |
-        rm -rf ./*
+        rm -rf ./* && rm -rf ./.*
         git clone --depth=1 https://github.com/topjohnwu/Magisk project
-        cp -r project/* ./
+        cp -a project/. ./
 
     - name: Set up NDK
       run: python build.py -v ndk
