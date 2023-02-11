@@ -35,12 +35,11 @@ jobs:
         rm -rf ./*
         git clone --depth=1 https://github.com/topjohnwu/Magisk project
         cp -r project/* ./
-        rm project
+
     - name: Set up NDK
       run: python build.py -v ndk
 
-    - name: Build the app
-   
+    - name: Build the app   
       run: |                
         python build.py -vr all
 
