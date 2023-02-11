@@ -87,12 +87,12 @@ jobs:
         git clone https://github.com/termux/termux-elf-cleaner.git tools/termux-elf-cleaner
 
     - name: Set up NDK
-      working-directory: ./project
+      #working-directory: ./project
       run: |   
         python build.py -v ndk
  
     - name: Build the app   
-      working-directory: ./project
+      #working-directory: ./project
       run: |   
         python build.py -vr all
 
