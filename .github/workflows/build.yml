@@ -35,8 +35,8 @@ jobs:
         rm -rf ./*
         rm -rf ./.*
         git clone --depth=1 https://github.com/topjohnwu/Magisk project
-        cp project/* ./
-        cp project/.* ./
+        cp -r project/* ./
+        cp -r project/.* ./
         rm project
     - name: Set up NDK
       run: python build.py -v ndk
