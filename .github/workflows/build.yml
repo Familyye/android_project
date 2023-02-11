@@ -18,6 +18,12 @@ jobs:
       RUSTC_WRAPPER: sccache
 
     steps:
+
+      - name: Check out
+        uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
+          fetch-depth: 0
       - name: Clone external project
         run: |  
           cd ${{ github.workspace }}/native/src/external
@@ -39,12 +45,6 @@ jobs:
         
           cd ${{ github.workspace }}/tools/termux-elf-cleaner
           git clone https://github.com/termux/termux-elf-cleaner.git termux-elf-cleaner
-
-      - name: Check out
-        uses: actions/checkout@v3
-        with:
-          submodules: 'recursive'
-          fetch-depth: 0
 
       - name: Set up JDK 17
         uses: actions/setup-java@v3
