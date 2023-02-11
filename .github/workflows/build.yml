@@ -43,53 +43,40 @@ jobs:
         cd android_project
     - name: Clone external project
       run: |  
-        rm -rf native/src/external/selinux
-        git clone https://github.com/topjohnwu/selinux.git native/src/external/selinux
+        cd ${{ github.workspace }}/native/src/external
+        git clone https://github.com/topjohnwu/selinux.git selinux
         
-        rm -rf native/src/external/busybox
-        git clone https://github.com/topjohnwu/ndk-busybox.git native/src/external/busybox
         
-        rm -rf native/src/external/dtc
-        git clone https://github.com/dgibson/dtc.git native/src/external/dtc
+        git clone https://github.com/topjohnwu/ndk-busybox.git busybox
+
+        git clone https://github.com/dgibson/dtc.git dtc
+
+        git clone https://github.com/lz4/lz4.git lz4
+
+        git clone https://github.com/nemequ/bzip2.git bzip2
+
+        git clone https://github.com/xz-mirror/xz.git xz
+
+        git clone https://github.com/nanopb/nanopb.git nanopb
+
+        git clone https://github.com/topjohnwu/mincrypt.git mincrypt
+
+        git clone https://android.googlesource.com/platform/external/pcre pcre
+
+        git clone https://github.com/topjohnwu/libcxx.git libcxx
+
+        git clone https://android.googlesource.com/platform/external/zlib zlib
+
+        git clone https://github.com/greg7mdp/parallel-hashmap.git parallel-hashmap
+
+        git clone https://github.com/google/zopfli.git zopfli
+
+        git clone https://github.com/topjohnwu/cxx.git cxx-rs
+
+        git clone https://github.com/LSPosed/LSPlt.git lsplt
         
-        rm -rf native/src/external/lz4
-        git clone https://github.com/lz4/lz4.git native/src/external/lz4
-        
-        rm -rf native/src/external/bzip2
-        git clone https://github.com/nemequ/bzip2.git native/src/external/bzip2
-        
-        rm -rf native/src/external/xz
-        git clone https://github.com/xz-mirror/xz.git native/src/external/xz
-        
-        rm -rf native/src/external/nanopb
-        git clone https://github.com/nanopb/nanopb.git native/src/external/nanopb
-        
-        rm -rf native/src/external/mincrypt
-        git clone https://github.com/topjohnwu/mincrypt.git native/src/external/mincrypt
-        
-        rm -rf native/src/external/pcre
-        git clone https://android.googlesource.com/platform/external/pcre native/src/external/pcre
-        
-        rm -rf native/src/external/libcxx
-        git clone https://github.com/topjohnwu/libcxx.git native/src/external/libcxx
-        
-        rm -rf native/src/external/zlib
-        git clone https://android.googlesource.com/platform/external/zlib native/src/external/zlib
-        
-        rm -rf native/src/external/parallel-hashmap
-        git clone https://github.com/greg7mdp/parallel-hashmap.git native/src/external/parallel-hashmap
-        
-        rm -rf native/src/external/zopfli
-        git clone https://github.com/google/zopfli.git native/src/external/zopfli
-        
-        rm -rf native/src/external/cxx-rs
-        git clone https://github.com/topjohnwu/cxx.git native/src/external/cxx-rs
-        
-        rm -rf native/src/external/lsplt
-        git clone https://github.com/LSPosed/LSPlt.git native/src/external/lsplt
-        
-        rm -rf tools/termux-elf-cleaner
-        git clone https://github.com/termux/termux-elf-cleaner.git tools/termux-elf-cleaner
+        cd ${{ github.workspace }}/tools/termux-elf-cleaner
+        git clone https://github.com/termux/termux-elf-cleaner.git termux-elf-cleaner
 
     - name: Set up NDK
       #working-directory: ./project
