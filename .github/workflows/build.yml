@@ -32,11 +32,12 @@ jobs:
 
     - name: Clone project
       run: |
-        #cd ../ && rm -rf android_project
-        git clone --depth=1 https://github.com/topjohnwu/Magisk project
+        cd ../ && rm -rf android_project
+        git clone --depth=1 https://github.com/topjohnwu/Magisk android_project
         #cp -a project/. ./
-        cd project
-        
+        cd android_project
+    - name: Clone external project
+      run: |  
         rm -rf native/src/external/selinux
         git clone https://github.com/topjohnwu/selinux.git native/src/external/selinux
         
