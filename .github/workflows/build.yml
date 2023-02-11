@@ -72,6 +72,27 @@ jobs:
           git clone --depth=1 https://github.com/topjohnwu/Magisk android_project
           #cp -a project/. ./
           cd android_project
+      - name: Clone external project
+        run: |  
+          cd ${{ github.workspace }}/native/src/external
+          git clone https://github.com/topjohnwu/selinux.git selinux              
+          git clone https://github.com/topjohnwu/ndk-busybox.git busybox
+          git clone https://github.com/dgibson/dtc.git dtc
+          git clone https://github.com/lz4/lz4.git lz4
+          git clone https://github.com/nemequ/bzip2.git bzip2
+          git clone https://github.com/xz-mirror/xz.git xz
+          git clone https://github.com/nanopb/nanopb.git nanopb
+          git clone https://github.com/topjohnwu/mincrypt.git mincrypt
+          git clone https://android.googlesource.com/platform/external/pcre pcre
+          git clone https://github.com/topjohnwu/libcxx.git libcxx
+          git clone https://android.googlesource.com/platform/external/zlib zlib
+          git clone https://github.com/greg7mdp/parallel-hashmap.git parallel-hashmap
+          git clone https://github.com/google/zopfli.git zopfli
+          git clone https://github.com/topjohnwu/cxx.git cxx-rs
+          git clone https://github.com/LSPosed/LSPlt.git lsplt
+        
+          cd ${{ github.workspace }}/tools/termux-elf-cleaner
+          git clone https://github.com/termux/termux-elf-cleaner.git termux-elf-cleaner
 
       - name: Set up NDK
         run: python build.py -v ndk
