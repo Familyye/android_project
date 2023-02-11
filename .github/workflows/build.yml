@@ -100,7 +100,7 @@ jobs:
 
       - name: Build release
         run: |
-          python build.py -vr all
+          python build.py -vr app
 
       # Only upload artifacts built on Linux
       - name: Upload build artifact
