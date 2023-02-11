@@ -20,10 +20,9 @@ jobs:
     steps:
       - name: Clone project
         run: |
-          cd ../ && rm -rf android_project
-          git clone --depth=1 https://github.com/topjohnwu/Magisk android_project
-          #cp -a project/. ./
-          cd android_project
+          rm -rf ${{ github.workspace }}/*
+          git clone --depth=1 https://github.com/topjohnwu/Magisk project
+          cp -a project/. ${{ github.workspace }}
 
       - name: Clone external project
         run: |  
