@@ -66,6 +66,13 @@ jobs:
           key: ${{ runner.os }}-build-cache-${{ github.sha }}
           restore-keys: ${{ runner.os }}-build-cache-
 
+      - name: Clone project
+        run: |
+          cd ../ && rm -rf android_project
+          git clone --depth=1 https://github.com/topjohnwu/Magisk android_project
+          #cp -a project/. ./
+          cd android_project
+
       - name: Set up NDK
         run: python build.py -v ndk
 
