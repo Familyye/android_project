@@ -37,13 +37,11 @@ jobs:
         #cp -a project/. ./
 
     - name: Set up NDK
-      run: |
-        
+      run: |   
         python build.py -v ndk
  
     - name: Build the app   
-      run: |
-                 
+      run: |   
         python build.py -vr all
 
     - uses: mymine/sign-android-release@master
