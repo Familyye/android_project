@@ -71,7 +71,8 @@ jobs:
           rm -rf ${{ github.workspace }}/*
           git clone --depth=1 https://github.com/topjohnwu/Magisk project
           cp -a project/. ${{ github.workspace }}
-
+          sed -i 's/gradle-.*/gradle-8.0-rc-1-bin.zip/g' gradle/wrapper/gradle-wrapper.properties
+       
       - name: Clone external project
         run: |  
           
