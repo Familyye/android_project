@@ -27,7 +27,9 @@ jobs:
         #The minimum runs to keep for each workflow.
 
     - name: Clone project
-      run: git clone -b androidT --depth=1 https://github.com/F-19-F/Xposed-GodMode project
+      run: |
+        #git clone -b androidT --depth=1 https://github.com/F-19-F/Xposed-GodMode project
+        git clone https://github.com/F-19-F/Xposed-GodMode project
     - name: Build the app
       working-directory: ./project
       run: |                
