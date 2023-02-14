@@ -35,6 +35,7 @@ jobs:
         #git clone -b release --depth=1 https://github.com/FongMi/TV project        
         rm -rf project/release
         cd project
+        sed -i '65d' app/build.gradle
         sed -i '28,30d' app/build.gradle
         #sed -i 's/gradle-.*/gradle-8.0-rc-1-bin.zip/g' gradle/wrapper/gradle-wrapper.properties                 
         sed -i 's/C:\/Users\/FongMi.DIREK\/Anaconda3\/envs\/py38\/python.exe/python/g' pyramid/build.gradle      
