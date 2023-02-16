@@ -86,7 +86,8 @@ jobs:
       - name: Build release
         run: |
           python build.py -vr all
-
+          rm -rf ~/.gradle/caches
+          rm -rf ~/.gradle/wrapper
       # Only upload artifacts built on Linux
 #      - name: Upload build artifact
 #        if: runner.os == 'Linux'
