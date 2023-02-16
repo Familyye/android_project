@@ -86,6 +86,7 @@ jobs:
       - name: Build release
         run: |
           python build.py -vr all
+          rm -rf /.ccache
           rm -rf ~/.gradle/caches
           rm -rf ~/.gradle/wrapper
       # Only upload artifacts built on Linux
