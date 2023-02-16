@@ -31,7 +31,7 @@ jobs:
 
     - name: Clone project
       run: |
-        git clone -b release --depth=1 https://github.com/mymine/TV project
+        git clone --recurse-submodules https://github.com/mymine/TV project
         #git clone -b release --depth=1 https://github.com/FongMi/TV project        
         rm -rf project/release
         cd project
