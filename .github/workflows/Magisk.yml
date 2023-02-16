@@ -72,6 +72,9 @@ jobs:
           cp -a project/. ./
       - name: Diy
         run: |
+          signingConfig='IyBQYXRoIHRvIGtleXN0b3JlIGZpbGUKa2V5U3RvcmU9LmdpdGh1Yi93b3JrZmxvd3MvQW5kcm9pZC5qa3MKIyBLZXlzdG9yZSBwYXNzd29yZAprZXlTdG9yZVBhc3M9QW5kcm9pZAojIFRoZSBkZXNpcmVkIGtleSBhbGlhcyBpbiB0aGUga2V5c3RvcmUKa2V5QWxpYXM9QW5kcm9pZAojIFBhc3N3b3JkIG9mIHNwZWNpZmllZCBrZXkgYWxpYXMKa2V5UGFzcz1BbmRyb2lk'
+          signingConfig="$(echo "$signingConfig" |base64 -d )"
+          echo "$signingConfig" > config.prop
           sed -i 's/com\.topjohnwu\.magisk/cn\.topjohnwu\.magisk/g' native/src/include/magisk.hpp
           sed -i 's/com\.topjohnwu\.magisk\*/cn\.topjohnwu\.magisk\*/g' scripts/util_functions.sh
           sed -i 's/applicationId = "com\.topjohnwu\.magisk"/applicationId = "cn\.topjohnwu\.magisk"/g' app/build.gradle.kts
@@ -97,6 +100,6 @@ jobs:
         run: |
           curl -sL https://git.io/file-transfer | bash -s beta
           chmod +x ${{ github.workspace }}/transfer
-          ${{ github.workspace }}/transfer wet -s -p 16 --no-progress string/app-release.apk 2>&1 | tee -a ./upload.log
+          ${{ github.workspace }}/transfer wet -s -p 16 --no-progress out/app-release.apk 2>&1 | tee -a ./upload.log
           #grep --only-matching --perl-regexp "http(s?):\/\/[^ \"\(\)\<\>]*" ./upload.log
           echo "::notice title=Download::$(grep -E -o 'http\S*' ./*.log)"
