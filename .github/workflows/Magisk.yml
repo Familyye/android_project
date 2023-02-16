@@ -1,0 +1,102 @@
+name: Magisk
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-22.04 ]
+    env:
+      NDK_CCACHE: ccache
+      CCACHE_DIR: ${{ github.workspace }}/.ccache
+      CCACHE_COMPILERCHECK: "%compiler% -dumpmachine; %compiler% -dumpversion"
+      RUSTC_WRAPPER: sccache
+
+    steps:
+      - name: Check out
+        uses: actions/checkout@v3.3.0
+        with:
+          submodules: 'recursive'
+          fetch-depth: 0
+
+      - name: Set up JDK 19
+        uses: actions/setup-java@v3.10.0
+        with:
+          distribution: 'temurin'
+          java-version: '19'
+
+      - name: Set up Python 3
+        uses: actions/setup-python@v4.5.0
+        with:
+          python-version: '3.x'
+
+      - name: Set up ccache
+        uses: hendrikmuhs/ccache-action@v1.2.8
+        with:
+          key: ${{ runner.os }}-${{ github.sha }}
+          restore-keys: ${{ runner.os }}
+
+      - name: Set up sccache
+        uses: hendrikmuhs/ccache-action@v1.2.8
+        with:
+          variant: sccache
+          key: ${{ runner.os }}-${{ github.sha }}
+          restore-keys: ${{ runner.os }}
+
+      - name: Cache Gradle dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            !~/.gradle/caches/build-cache-*
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle.kts') }}
+          restore-keys: ${{ runner.os }}-gradle-
+
+      - name: Cache build cache
+        uses: actions/cache@v3.2.5
+        with:
+          path: |
+            ~/.gradle/caches/build-cache-*
+          key: ${{ runner.os }}-build-cache-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-build-cache-
+      - name: Clone project
+        run: |
+          rm -rf ./*
+          git clone --recurse-submodules https://github.com/topjohnwu/Magisk project
+          cp -a project/. ./
+      - name: Diy
+        run: |
+          sed -i 's/com\.topjohnwu\.magisk/cn\.topjohnwu\.magisk/g' native/src/include/magisk.hpp
+          sed -i 's/com\.topjohnwu\.magisk\*/cn\.topjohnwu\.magisk\*/g' scripts/util_functions.sh
+          sed -i 's/applicationId = "com\.topjohnwu\.magisk"/applicationId = "cn\.topjohnwu\.magisk"/g' app/build.gradle.kts
+          sed -i 's/applicationId = "com\.topjohnwu\.magisk"/applicationId = "cn\.topjohnwu\.magisk"/g' stub/build.gradle.kts
+          
+      - name: Set up NDK
+        run: python build.py -v ndk
+
+      - name: Build release
+        run: |
+          python build.py -vr all
+
+      # Only upload artifacts built on Linux
+#      - name: Upload build artifact
+#        if: runner.os == 'Linux'
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: ${{ github.sha }}
+#          path: out/app-release.apk
+
+      - name: Upload file to file.io
+        id: fileio
+        run: |
+          curl -sL https://git.io/file-transfer | bash -s beta
+          chmod +x ${{ github.workspace }}/transfer
+          ${{ github.workspace }}/transfer wet -s -p 16 --no-progress string/app-release.apk 2>&1 | tee -a ./upload.log
+          #grep --only-matching --perl-regexp "http(s?):\/\/[^ \"\(\)\<\>]*" ./upload.log
+          echo "::notice title=Download::$(grep -E -o 'http\S*' ./*.log)"
