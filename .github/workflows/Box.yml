@@ -28,8 +28,8 @@ jobs:
 
     - name: Clone project
       run: |
-        #git clone -b main --depth=1 https://github.com/takagen99/Box project
-        git clone --recurse-submodules -b tmp --depth=1 https://github.com/cyf783/hbox project
+        git clone --recurse-submodules -b main --depth=1 https://github.com/takagen99/Box project
+        #git clone --recurse-submodules -b tmp --depth=1 https://github.com/cyf783/hbox project
     - name: Build the app
       working-directory: ./project
       run: |       
