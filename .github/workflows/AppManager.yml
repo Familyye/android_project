@@ -26,7 +26,7 @@ jobs:
         #The minimum runs to keep for each workflow.
 
     - name: Clone project
-      run: git clone -b master --depth=1 https://github.com/MuntashirAkon/AppManager project
+      run: git clone --recurse-submodules https://github.com/MuntashirAkon/AppManager project
     - name: Build the app
       working-directory: ./project
       run: |                
