@@ -18,7 +18,7 @@ jobs:
         cache: gradle
       
     - name: Clone project
-      run: git clone -b main --depth=1 https://github.com/q215613905/TVBoxOS project
+      run: git clone -b mine --recurse-submodules https://github.com/q215613905/TVBoxOS project
     - name: Release Apk Sign
       working-directory: ./project
       run: |
