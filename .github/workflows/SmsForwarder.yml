@@ -28,7 +28,7 @@ jobs:
         #The minimum runs to keep for each workflow.
       
     - name: Clone project
-      run: git clone --depth=1 https://github.com/pppscn/SmsForwarder project
+      run: git clone --recurse-submodules https://github.com/pppscn/SmsForwarder project
     - name: Release Apk Sign
       working-directory: ./project
       run: |
