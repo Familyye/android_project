@@ -36,7 +36,7 @@ jobs:
         git clone --recurse-submodules https://github.com/mymine/TV project
         #git clone -b release --depth=1 https://github.com/FongMi/TV project
 
-    - name:DIY APP
+    - name: DIY APP
       working-directory: ./project
       run: |
         #sed -i '65d' app/build.gradle
