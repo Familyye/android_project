@@ -10,17 +10,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: set up JDK 19
+    - name: set up JDK 11
       uses: actions/setup-java@v3.10.0
       with:
-        java-version: '19'
+        java-version: '11'
         distribution: 'temurin'
-
     - name: Set up Python 3.11.1
       uses: actions/setup-python@v4.5.0
       with:
         python-version: "3.11.1" 
-
     - name: Delete workflows
       uses: Mattraks/delete-workflow-runs@v2
       with:
@@ -34,17 +32,14 @@ jobs:
     - name: Clone project
       run: |
         git clone --recurse-submodules https://github.com/mymine/TV project
-        #git clone -b release --recurse-submodules https://github.com/FongMi/TV project
-
-    - name: Diy app
-      working-directory: ./project
-      run: |
+        #git clone -b release --depth=1 https://github.com/FongMi/TV project        
+        rm -rf project/release
+        cd project
         #sed -i '65d' app/build.gradle
         #sed -i '25,27d' app/build.gradle
         #sed -i 's/gradle-.*/gradle-8.0-rc-1-bin.zip/g' gradle/wrapper/gradle-wrapper.properties                 
         sed -i 's/C:\/Users\/FongMi.DIREK\/Anaconda3\/envs\/py38\/python.exe/python/g' pyramid/build.gradle      
         cp -r gradle.properties local.properties
-
     - name: Build the app
       working-directory: ./project
       run: |
@@ -55,7 +50,6 @@ jobs:
         #cp app/build/outputs/apk/leanbackPython/release/leanback-python.apk app/leanback-python.apk
         #cp app/build/outputs/apk/mobileJava/release/mobile-java.apk app/mobile-java.apk
         #cp app/build/outputs/apk/mobilePython/release/mobile-python.apk app/mobile-python.apk        
-
     - uses: mymine/sign-android-release@master
       name: Sign APK
       with:
