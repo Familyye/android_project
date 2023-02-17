@@ -42,7 +42,8 @@ jobs:
         sed -i 's/gradle-.*/gradle-7.6-bin.zip/g' gradle/wrapper/gradle-wrapper.properties
 
     - name: Build the app
-      working-directory: ./project        
+      working-directory: ./project   
+      run: |     
         chmod +x gradlew
         ./gradlew assemblerelease
 
