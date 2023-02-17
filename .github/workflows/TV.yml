@@ -52,6 +52,7 @@ jobs:
       run: |
         chmod +x gradlew
         ./gradlew assemblerelease
+        cp app/build/outputs/apk/*/release/*.apk app/
 
     - uses: mymine/sign-android-release@master
       name: Sign APK
