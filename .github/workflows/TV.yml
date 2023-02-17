@@ -33,17 +33,17 @@ jobs:
 
     - name: Clone project
       run: |
-        #git clone --recurse-submodules https://github.com/mymine/TV project
-        git clone -b dev --recurse-submodules https://github.com/FongMi/TV project        
+        git clone --recurse-submodules https://github.com/mymine/TV project
+        #git clone -b dev --recurse-submodules https://github.com/FongMi/TV project        
         rm -rf project/release
 
     - name: Diy App
       working-directory: ./project
       run: |
-        sed -i '26,27d' settings.gradle
-        sed -i '66,69d' app/build.gradle
-        sed -i "65i implementation 'com.google.android.exoplayer:exoplayer:2.18.2'" app/build.gradle     
-        #sed -i 's/gradle-.*/gradle-8.0-rc-1-bin.zip/g' gradle/wrapper/gradle-wrapper.properties                 
+        #sed -i '26,27d' settings.gradle
+        #sed -i '66,69d' app/build.gradle
+        #sed -i "65i implementation 'com.google.android.exoplayer:exoplayer:2.18.2'" app/build.gradle     
+        sed -i 's/gradle-.*/gradle-8.0-rc-1-bin.zip/g' gradle/wrapper/gradle-wrapper.properties                 
         sed -i 's/C:\/Users\/FongMi.DIREK\/Anaconda3\/envs\/py38\/python.exe/python/g' pyramid/build.gradle      
         cp -r gradle.properties local.properties
 
