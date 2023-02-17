@@ -39,6 +39,7 @@ jobs:
 
     - name: Diy App
       working-directory: ./project
+      run: |
         #sed -i '65d' app/build.gradle
         #sed -i '25,27d' app/build.gradle
         #sed -i 's/gradle-.*/gradle-8.0-rc-1-bin.zip/g' gradle/wrapper/gradle-wrapper.properties                 
