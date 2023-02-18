@@ -68,7 +68,9 @@ jobs:
       - name: Clone project
         run: |
           rm -rf ./*
-          git clone --recurse-submodules https://github.com/topjohnwu/Magisk project
+          #git clone --recurse-submodules https://github.com/topjohnwu/Magisk project
+          git clone -b gradle --recurse-submodules https://github.com/LSPosed/Metagisk project
+          
           cp -a project/. ./
       - name: Diy
         run: |
